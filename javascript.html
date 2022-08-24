@@ -1,0 +1,148 @@
+<html>
+<head>
+</head>
+<body onload="CreateLodingRing(30, 1, '#000');">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js"></script>
+<script>
+function CreateLodingRing(size, dotsize, dotcolor) {
+  //#region Create Element
+  var ring = Object();
+  let loadingring = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  loadingring.id = "winloding";
+  loadingring.setAttribute("viewBox", "0 0" + " " + size + " " + size);
+  for (let i = 0; i < 6; i++) {
+    let dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    dot.style.transformOrigin = "center center";
+    dot.style.opacity = 0;
+    dot.setAttribute("class", "d" + (i + 1));
+    dot.setAttribute("fill", dotcolor);
+    dot.setAttribute("cx", size / 2);
+    dot.setAttribute("cy", dotsize + 2);
+    dot.setAttribute("r", dotsize);
+    loadingring.appendChild(dot);
+  }
+  document.body.appendChild(loadingring);
+  //#endregion
+  var tl = anime.timeline({
+    loop: true
+  });
+  // #region add animation
+  // tl.add({
+  //   targets: "#winloding d1",
+  //   rotate: [
+  //     { value: -110, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //     { value: 10, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //     { value: 93, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //     { value: 205, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //     { value: 357, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //     { value: 439, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //     { value: 585, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //   ]
+  // })
+  //   .add(
+  //     {
+  //       targets: "#winloding d2",
+  //       rotate: [
+  //         { value: -116, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //         { value: 4, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //         { value: 87, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 199, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //         { value: 351, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //         { value: 433, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 579, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //       ]
+  //     },
+  //     167
+  //   )
+  //   .add(
+  //     {
+  //       targets: "#winloding d3",
+  //       rotate: [
+  //         { value: -122, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //         { value: -2, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //         { value: 81, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 193, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //         { value: 345, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //         { value: 427, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 573, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //       ]
+  //     },
+  //     334
+  //   )
+  //   .add(
+  //     {
+  //       targets: "#winloding d4",
+  //       rotate: [
+  //         { value: -128, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //         { value: -8, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //         { value: 75, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 187, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //         { value: 339, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //         { value: 421, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 567, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //       ]
+  //     },
+  //     501
+  //   )
+  //   .add(
+  //     {
+  //       targets: "#winloding d5",
+  //       rotate: [
+  //         { value: -134, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //         { value: -14, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //         { value: 69, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 181, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //         { value: 331, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //         { value: 415, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 561, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //       ]
+  //     },
+  //     668
+  //   )
+  //   .add(
+  //     {
+  //       targets: "#winloding d6",
+  //       rotate: [
+  //         { value: -140, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+  //         { value: -20, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+  //         { value: 63, duration: 767, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 175, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+  //         { value: 325, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+  //         { value: 409, duration: 766, easing: "cubicBezier(0, 0, 1, 1)" },
+  //         { value: 555, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+  //       ]
+  //     },
+  //     835
+  //   );
+  // #endregion
+  for (let i = 0; i < 6; i++) {
+    let basevalue = -110 - 6 * i;
+    tl.add(
+      {
+        targets: "#winloding .d" + (i + 1),
+        rotate: [
+          { value: basevalue, duration: 0, easing: "cubicBezier(0.13,0.21,0.1,0.7)" },
+          { value: basevalue + 120, duration: 433, easing: "cubicBezier(0.02,0.33,0.38,0.77)" },
+          { value: basevalue + 203, duration: 767, easing: "linear" },
+          { value: basevalue + 315, duration: 417, easing: "cubicBezier(0.57,0.17,0.95,0.75)" },
+          { value: basevalue + 467, duration: 400, easing: "cubicBezier(0,0.19,0.07,0.72)" },
+          { value: basevalue + 549, duration: 766, easing: "linear" },
+          { value: basevalue + 695, duration: 434, easing: "cubicBezier(0,0,0.95,0.37)" }
+        ],
+        opacity: [
+          { value: 1, duration: 1, easing: "linear" },
+          { value: 1, duration: 3210, easing: "linear" },
+          { value: 0, duration: 10, easing: "linear" },
+          { value: 0, duration: 260, easing: "linear" }
+        ]
+      },
+      167 * i
+    );
+  }
+  ring.timeline = tl;
+  ring.svgitem = loadingring;
+  return ring;
+}
+</script>
+</body>
+</html>
