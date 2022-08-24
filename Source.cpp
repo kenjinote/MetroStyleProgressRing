@@ -24,8 +24,7 @@ TCHAR szClassName[] = TEXT("Window");
 
 template<class Interface> inline void SafeRelease(Interface** ppInterfaceToRelease)
 {
-	if (*ppInterfaceToRelease != NULL)
-	{
+	if (*ppInterfaceToRelease != NULL) {
 		(*ppInterfaceToRelease)->Release();
 		(*ppInterfaceToRelease) = NULL;
 	}
@@ -48,8 +47,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(m_pDWriteFactory), reinterpret_cast<IUnknown**>(&m_pDWriteFactory));
 			if (FAILED(hr))
 				return -1;
-			for (int i = 0; i < POINT_COUNT; i++)
-			{
+			for (int i = 0; i < POINT_COUNT; i++) {
 				dAnimation[i] = 1.4 * M_PI * i / POINT_COUNT;
 				while (dAnimation[i] > 2.0 * M_PI) dAnimation[i] -= 2.0 * M_PI;
 				point[i].x = (FLOAT)(X_POS + (RING_WIDTH / 2.0) + (RING_WIDTH / 2.0) * cos(dAnimation[i] + i * POINT_OFFSET - SPEEDUP_ANGLE));
@@ -60,8 +58,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_TIMER:
 		{
-			for (int i = 0; i < POINT_COUNT; i++)
-			{
+			for (int i = 0; i < POINT_COUNT; i++) {
 				dAnimation[i] += (sin(dAnimation[i]) + 1.2) / 10.0;
 				while (dAnimation[i] > 2.0 * M_PI) dAnimation[i] -= 2.0 * M_PI;
 				point[i].x = (FLOAT)(X_POS + (RING_WIDTH / 2.0) + (RING_WIDTH / 2.0) * cos(dAnimation[i] + i * POINT_OFFSET - SPEEDUP_ANGLE));
@@ -96,8 +93,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					m_pRenderTarget->FillEllipse(ellipse, m_pBlackBrush);
 				}
 				hr = m_pRenderTarget->EndDraw();
-				if (hr == D2DERR_RECREATE_TARGET)
-				{
+				if (hr == D2DERR_RECREATE_TARGET) {
 					hr = S_OK;
 					SafeRelease(&m_pRenderTarget);
 					SafeRelease(&m_pBlackBrush);
@@ -110,8 +106,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		InvalidateRect(hWnd, 0, 0);
 		break;
 	case WM_SIZE:
-		if (m_pRenderTarget)
-		{
+		if (m_pRenderTarget) {
 			D2D1_SIZE_U size = { LOWORD(lParam), HIWORD(lParam) };
 			m_pRenderTarget->Resize(size);
 		}
@@ -161,8 +156,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	);
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 	UpdateWindow(hWnd);
-	while (GetMessage(&msg, 0, 0, 0))
-	{
+	while (GetMessage(&msg, 0, 0, 0)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
